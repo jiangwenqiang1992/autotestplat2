@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'product',
     'apitest',
     'bug',
-    #'result',
+    'result',
     #'notify',
 ]
 

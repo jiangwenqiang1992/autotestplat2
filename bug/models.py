@@ -3,7 +3,7 @@ from product.models import Product
 # Create your models here.
 
 class Bug(models.Model):
-    Product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     name = models.CharField('bug 名称', max_length=64)  # Bug 名称
     BUG_STATUS = (('激活', '激活'), ('已解决', '已解决'), ('已关闭', '已关闭'))
     status = models.CharField(verbose_name='解决状态', choices=BUG_STATUS, default='激活 ', max_length=200)
