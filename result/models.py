@@ -10,6 +10,7 @@ class ResultCount(models.Model):
     run_count = models.SmallIntegerField('运行用例数')
     pass_count = models.SmallIntegerField('通过用例数')
     fail_count = models.SmallIntegerField('失败用例数')
+    notify_status = models.SmallIntegerField('是否通知', default=0, null=True, blank=True)
     create_time = models.DateTimeField('创建时间', auto_now_add=True)
     update_time = models.DateTimeField('更新时间', auto_now=True)
 
