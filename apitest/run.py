@@ -52,8 +52,8 @@ class RunApiCase:
         extract_re = str(extract_re).split('\n')
         for ex in extract_re:
             k, v = ex.split('=')
-            data = re.findall(v, json.dumps(jsondata))[0]
-            if data == []:
+            data = re.search(v, json.dumps(jsondata))[0]
+            if data:
                 raise IndexError("未找到匹配对象{}".format(v))
             extract_param[k] = data
         return extract_param
