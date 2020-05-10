@@ -42,6 +42,7 @@ class Element(models.Model):
 class Case(models.Model):
     product = models.ForeignKey('product.Product', related_name='case', on_delete=models.CASCADE)
     casename = models.CharField(max_length=200, unique=True)
+    pre_case = models.CharField(max_length=200, null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -71,4 +72,4 @@ class CaseStep(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.number
+        return str(self.number)

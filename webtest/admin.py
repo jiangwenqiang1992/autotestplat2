@@ -6,7 +6,6 @@ from webtest.models import Page, Element, Case, CaseStep
 
 class ElementAdmin(admin.TabularInline):
     list_display = ['page', 'elementname', 'targeting', 'value', 'create_at', 'update_at']
-    # change_form_template = 'admin/extras/record_change_form.html'
     model = Element
     extra = 1
 

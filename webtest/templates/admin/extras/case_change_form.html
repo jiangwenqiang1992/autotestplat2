@@ -1,0 +1,93 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n admin_urls static admin_modify %}
+
+ 
+
+{% block extrahead %}{{ block.super }}
+
+<script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+
+    <script>
+
+        django.jQuery(function() {
+            var select = django.jQuery("#id_product");
+            console.log(select);
+            select.change(function(){
+
+{#                console.log("value change"+django.jQuery(this).val());#}
+
+                var url = "/getpage/"+django.jQuery(this).val();//能够正确的访问到view的url
+
+{#                console.log(url);#}
+
+                django.jQuery.get(
+
+                    url,
+
+                    function(data){
+                                             pagedata = data;
+                        var target = django.jQuery('select[id$="page"]');
+
+                        target.empty();//先要清空一下
+                                             target.append("<option value selected>---------</option>")
+                        data.forEach(function(e){
+
+                            // 将从view得到的id和db_user名称赋值给db_server的select
+
+                            console.log(e,e.id,e.name);
+                                                    target.append('<option value="'+e.id+'">'+e.name+'</option>');
+                            //target.append("<option value='"+e.id+"'>"+e.name+"</option>");
+
+                            target.eq(0).attr('selected', 'true');
+
+                        });
+
+                })
+
+            });
+                      var pages = django.jQuery('select[id$="page"]');
+            pages.change(function(){
+                             var page_id = django.jQuery(this).attr('id');
+                             var num = page_id.replace(/[^0-9]/ig,"");
+                             var e_id = "id_step-"+num+"-element";
+
+                console.log("value change"+django.jQuery(this).val());
+
+                var url = "/getelement/"+django.jQuery(this).val();//能够正确的访问到view的url
+
+                console.log(url);
+
+                django.jQuery.get(
+
+                    url,
+
+                    function(data){
+
+                        var target = django.jQuery('#'+e_id);
+
+                        target.empty();//先要清空一下
+                                             //target.append("<option value selected>---------</option>")
+                        data.forEach(function(e){
+
+                            // 将从view得到的id和db_user名称赋值给db_server的select
+                           console.log(e,e.id,e.name);
+                                                  target.append('<option value="'+e.id+'">'+e.name+'</option>');
+                            //target.append("<option value='"+e.id+"'>"+e.name+"</option>");
+
+                            target.eq(0).attr('selected', 'true');
+
+                        });
+
+                })
+
+            });
+ 
+
+        });
+
+    </script>
+
+{#{{ media }}#}
+
+{% endblock %}
