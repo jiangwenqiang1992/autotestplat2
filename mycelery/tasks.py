@@ -1,7 +1,7 @@
 import time
 from .celeryconfig import app
 from notify.notifyTasks import runCaseFailNotify,dayNotify
-
+from dex.tasks import DexTest
 @app.task()
 def yibu():
     print('start yibu')
@@ -19,3 +19,8 @@ def runcCaseFailNotifyTask():
 @app.task()
 def dayNotifyTask():
     dayNotify()
+
+@app.task()
+def dextest():
+    test = DexTest()
+    test.runTest()
