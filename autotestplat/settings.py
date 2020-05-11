@@ -10,6 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+
+
+import djcelery
+djcelery.setup_loader()
+
+
+# 配置redis
+BROKER_URL = 'redis://localhost:8888//0'
+CELERY_RESULT_BACKEND = 'redis://localhost:8888/1'
+
+# 配置定时器
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +39,7 @@ SECRET_KEY = 'yh97hm!^m6dv!wal#g!!31(#jg8ph_7!0!fvuf)+pb=flb=_p$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +53,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'apitest',
+    'webtest',
     'bug',
     'result',
-    #'notify',
+    'djcelery',
+    'mycelery',
+
 ]
 
 MIDDLEWARE = [
