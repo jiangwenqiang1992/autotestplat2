@@ -1,8 +1,9 @@
 import random
+from time import sleep
 
-from django.test import TestCase
+class test_task:
+    i = 1
 
-# Create your tests here.
-price = random.randrange(100,500)
-print(price)
-print(10**8)
+test = [test_task() for i in range(10)]
+
+print(test[5].i)
